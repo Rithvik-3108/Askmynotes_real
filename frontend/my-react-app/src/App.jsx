@@ -11,7 +11,10 @@ function App() {
 
   // FastAPI backend
   // const BACKEND_URL = "http://127.0.0.1:8000";
-  const BACKEND_URL = "https://askmynotes-real-backend.onrender.com";
+  // const BACKEND_URL = "https://askmynotes-real-backend.onrender.com";
+  const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL ||
+  "http://127.0.0.1:8000";
 
   const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];

@@ -4,6 +4,9 @@ import numpy as np
 from pypdf import PdfReader
 import httpx
 
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
 
 # ==========================================
 # Environment
@@ -13,44 +16,13 @@ load_dotenv()
 
 
 # ==========================================
-# Embedding model
-# ==========================================
-
-embedding_model = None
-
-
-def get_embedding_model():
-    """
-    Load the SentenceTransformer model only when
-    it is actually needed.
-
-    This prevents the model from loading when
-    FastAPI starts.
-    """
-
-    global embedding_model
-
-    if embedding_model is None:
-
-        print("Loading embedding model...")
-
-        from sentence_transformers import SentenceTransformer
-
-        embedding_model = SentenceTransformer(
-            "all-MiniLM-L6-v2"
-        )
-
-        print("Embedding model loaded.")
-
-    return embedding_model
-
-
-# ==========================================
-# Store processed PDF in memory
+# Store processed PDF
 # ==========================================
 
 chunks = []
-chunk_embeddings = []
+
+vectorizer = None
+chunk_vectors = None
 
 
 # ==========================================
@@ -106,17 +78,23 @@ def create_chunks(
 
 
 # ==========================================
-# Create embeddings
+# Create TF-IDF vectors
 # ==========================================
 
 def create_embeddings(text_chunks):
 
-    model = get_embedding_model()
+    global vectorizer
 
-    return model.encode(
-        text_chunks,
-        convert_to_numpy=True
+    vectorizer = TfidfVectorizer(
+        max_features=5000,
+        stop_words="english"
     )
+
+    vectors = vectorizer.fit_transform(
+        text_chunks
+    )
+
+    return vectors
 
 
 # ==========================================
@@ -126,7 +104,7 @@ def create_embeddings(text_chunks):
 def process_pdf(pdf_path):
 
     global chunks
-    global chunk_embeddings
+    global chunk_vectors
 
     print("Processing PDF...")
 
@@ -148,11 +126,11 @@ def process_pdf(pdf_path):
         f"Created {len(chunks)} chunks."
     )
 
-    chunk_embeddings = create_embeddings(
+    chunk_vectors = create_embeddings(
         chunks
     )
 
-    print("Embeddings created.")
+    print("TF-IDF vectors created.")
 
     return {
         "chunks": len(chunks),
@@ -176,46 +154,30 @@ def retrieve_relevant_chunks(
             "Upload a PDF first."
         )
 
+    if vectorizer is None or chunk_vectors is None:
+
+        raise ValueError(
+            "PDF vectors are not available."
+        )
+
     print(
-        "Creating question embedding..."
+        "Creating question vector..."
     )
 
-    model = get_embedding_model()
+    question_vector = vectorizer.transform(
+        [question]
+    )
 
-    question_embedding = model.encode(
-        [question],
-        convert_to_numpy=True
+    similarities = cosine_similarity(
+        question_vector,
+        chunk_vectors
     )[0]
 
-    # Normalize question vector
-    question_embedding = (
-        question_embedding /
-        (
-            np.linalg.norm(
-                question_embedding
-            ) + 1e-10
-        )
+    top_k = min(
+        top_k,
+        len(chunks)
     )
 
-    # Normalize chunk vectors
-    normalized_embeddings = (
-        chunk_embeddings /
-        (
-            np.linalg.norm(
-                chunk_embeddings,
-                axis=1,
-                keepdims=True
-            ) + 1e-10
-        )
-    )
-
-    # Cosine similarity
-    similarities = np.dot(
-        normalized_embeddings,
-        question_embedding
-    )
-
-    # Get top chunks
     top_indices = np.argsort(
         similarities
     )[-top_k:][::-1]

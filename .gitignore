@@ -1,0 +1,133 @@
+# ==========================================
+# PYTHON
+# ==========================================
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python build/package files
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# ==========================================
+# ENVIRONMENT / SECRETS
+# ==========================================
+
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# ASKMYNOTES BACKEND
+# ==========================================
+
+# Uploaded PDFs
+uploads/
+
+# Generated/local data
+data/
+temp/
+tmp/
+
+# Local vector databases / indexes
+chroma/
+chroma_db/
+vectorstore/
+vector_db/
+faiss_index/
+
+# Local model/cache files
+models/
+cache/
+
+# Pickle/model files - IGNORE if they are generated/downloaded locally
+*.pkl
+*.pickle
+*.joblib
+
+# Logs
+*.log
+logs/
+
+# ==========================================
+# NODE / REACT / VITE
+# ==========================================
+
+node_modules/
+
+# Vite build output
+dist/
+
+# Vite cache
+.vite/
+
+# npm logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==========================================
+# EDITORS / IDE
+# ==========================================
+
+.vscode/
+.idea/
+
+# VS Code local settings
+*.code-workspace
+
+# ==========================================
+# OPERATING SYSTEM
+# ==========================================
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ==========================================
+# TEMPORARY FILES
+# ==========================================
+
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# ==========================================
+# DOCKER - if you use Docker locally
+# ==========================================
+
+docker-compose.override.yml
+
+# ==========================================
+# JUPYTER
+# ==========================================
+
+.ipynb_checkpoints/
+
+# ==========================================
+# LOCAL DATABASES
+# ==========================================
+
+*.sqlite
+*.sqlite3
+*.db

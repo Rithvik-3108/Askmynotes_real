@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-multipart
+pypdf==5.0.1
+sentence-transformers
+numpy
+httpx
+scipy
+python-dotenv

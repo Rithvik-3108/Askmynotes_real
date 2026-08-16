@@ -1,0 +1,227 @@
+/* App1.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #020617;
+  color: #f8fafc;
+}
+
+/* Main App */
+.app {
+  min-height: 100vh;
+  background: #020617;
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px;
+}
+
+/* Main Container */
+.container {
+  width: 100%;
+  max-width: 800px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  font-size: 40px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.header p {
+  color: #94a3b8;
+  font-size: 16px;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 32px;
+}
+
+.section-label {
+  display: block;
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* File Input */
+.file-input {
+  width: 100%;
+  color: #94a3b8;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.file-input::file-selector-button {
+  margin-right: 16px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.file-input::file-selector-button:hover {
+  background: #1d4ed8;
+}
+
+.file-status {
+  color: #64748b;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* Question Textarea */
+.question {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: #f8fafc;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.question::placeholder {
+  color: #64748b;
+}
+
+.question:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* Button Row */
+.button-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.status {
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* Ask Button */
+.ask-button {
+  padding: 11px 24px;
+  border: none;
+  border-radius: 9px;
+  background: #2563eb;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ask-button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.ask-button:active {
+  transform: scale(0.97);
+}
+
+/* Answer */
+.answer-box {
+  min-height: 150px;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  background: #111827;
+}
+
+.answer-text {
+  color: #e2e8f0;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.answer-placeholder {
+  color: #64748b;
+  font-style: italic;
+}
+
+/* Sources */
+.sources {
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  background: #111827;
+}
+
+.sources h2 {
+  color: #cbd5e1;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.sources ol {
+  padding-left: 20px;
+}
+
+.sources li {
+  color: #94a3b8;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+/* Footer */
+.footer {
+  margin-top: 32px;
+  color: #475569;
+  font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .app {
+    padding: 20px 12px;
+  }
+
+  .container {
+    padding: 22px;
+  }
+
+  .header h1 {
+    font-size: 32px;
+  }
+
+  .button-row {
+    align-items: flex-end;
+    gap: 12px;
+  }
+}

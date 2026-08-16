@@ -22,7 +22,7 @@ origins = [
     "http://localhost:5175",
     "http://127.0.0.1:5174",
     "http://127.0.0.1:5175",
-    "https://askmynotes-frontend.onrender.com",
+    "https://askmynotes-real-frontend.onrender.com",
 
     # Add your actual Render frontend URL here
     # "https://your-frontend.onrender.com",
